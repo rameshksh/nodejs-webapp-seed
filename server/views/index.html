@@ -19,7 +19,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "/api/weather/" + '37.8267,-122.4233',
+                url: "/api/weather/" + '40.0026767,-75.2581195,11',
                 cache: false,
                 success: function (res) {
 
@@ -27,19 +27,17 @@
 
                     if (res) {
 
-                        $('.summary p').html(res.timezone); 
+                        $('.summary p').html(res.timezone);
 
-                        html += '<td>' + res.currently["temperature"] + 'F</td>';
-                        html += '<td' + res.currently["humidity"] + '</td>';
                         html += '<td>' + res.currently["summary"] + '</td>';
+                        html += '<td>' + res.currently["apparentTemperature"] + '</td>';
+                        html += '<td>' + res.currently["humidity"] + '%</td>';
                         html += '<td>' + res.currently["pressure"] + '</td>';
-                        html += '<td>' + res.currently["windSpeed"] + '</td>';
+                        html += '<td>' + res.currently["windSpeed"] + 'Km/h</td>';
                         html += '<td>' + res.currently["visibility"] + '</td>';
 
                         $("#results").append(html);
                     }
-
-
                 }
             });
         });
@@ -55,19 +53,19 @@
     <main>
         <div class="container border h-25 w-75">
             <div class="summary">
-               <label>Location Time Zone</label>
-               <p></p>
+                <label>Location Time Zone</label>
+                <p></p>
             </div>
             <table width="100%">
                 <tr>
+                    <th>
+                        Summary
+                    </th>
                     <th>
                         Temperature
                     </th>
                     <th>
                         Humidity
-                    </th>
-                    <th>
-                        Summary
                     </th>
                     <th>
                         Pressure
@@ -80,7 +78,7 @@
                     </th>
                 </tr>
                 <tr id="results">
-                    
+
                 </tr>
             </table>
         </div>

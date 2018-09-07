@@ -8,14 +8,14 @@ export interface IWeatherService {
 }
 
 export class WeatherService implements IWeatherService {
-    private apiUrl: string = "https://api.darksky.net/forecast/17b2f5590595e8181889f0728db3fdc3/37.8267,-122.4233";
+    private apiUrl: string = "https://api.darksky.net/forecast/17b2f5590595e8181889f0728db3fdc3/";
 
     public constructor() { }
 
-    public get(query: Object, callback: (errr: Error, item: Weather) => any) {
+    public get(cords: string, callback: (errr: Error, item: Weather) => any) {
         console.log('Inside service....');
 
-        request.get(this.apiUrl, (error, response, body) => {
+        request.get(this.apiUrl + cords, (error, response, body) => {
             // A chunk of data has been recieved.
             let obj = JSON.parse(body);
 
