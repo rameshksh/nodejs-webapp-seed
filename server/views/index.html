@@ -5,23 +5,47 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Weather Report App</title>
-
+    <base href="/">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
 
-    <style type="text/css">
-        .container {
-            min-height: 400px;
-            background-color: #d3d3d3
-        }
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
 
-        .summary{
-            height: 100px;
-        }
-    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: "/api/weather/" + '37.8267,-122.4233',
+                cache: false,
+                success: function (res) {
+
+                    var html = '';
+
+                    if (res) {
+
+                        $('.summary p').html(res.timezone); 
+
+                        html += '<td>' + res.currently["temperature"] + 'F</td>';
+                        html += '<td' + res.currently["humidity"] + '</td>';
+                        html += '<td>' + res.currently["summary"] + '</td>';
+                        html += '<td>' + res.currently["pressure"] + '</td>';
+                        html += '<td>' + res.currently["windSpeed"] + '</td>';
+                        html += '<td>' + res.currently["visibility"] + '</td>';
+
+                        $("#results").append(html);
+                    }
+
+
+                }
+            });
+        });
+
+    </script>
+
 </head>
 
 <body>
@@ -31,23 +55,32 @@
     <main>
         <div class="container border h-25 w-75">
             <div class="summary">
-                <div>
-                    Location
-                </div>
+               <label>Location Time Zone</label>
+               <p></p>
             </div>
-            <table>
+            <table width="100%">
                 <tr>
                     <th>
-                        Place
+                        Temperature
                     </th>
                     <th>
-
+                        Humidity
+                    </th>
+                    <th>
+                        Summary
+                    </th>
+                    <th>
+                        Pressure
+                    </th>
+                    <th>
+                        Wind Speed
+                    </th>
+                    <th>
+                        Visibility
                     </th>
                 </tr>
-                <tr>
-                    <td>
-
-                    </td>
+                <tr id="results">
+                    
                 </tr>
             </table>
         </div>

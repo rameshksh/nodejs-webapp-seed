@@ -1,28 +1,32 @@
 import { Express, Router, Request, Response } from 'express';
-import { IBaseService, BaseService } from '../services/baseService';
-import { BaseController, IBaseController } from '../controllers/baseController';
+import { IWeatherService, WeatherService } from '../services/weatherService';
+import { WeatherController, IWeatherController } from '../controllers/weatherController';
 
-export interface IApiRoute<TEntity> {
+export interface IApiRoute {
     get();
 }
 
 var self;
-export class ApiRoute<TEntity> implements IApiRoute<TEntity>
-{
-    baseController: IBaseController<TEntity>;
-    baseService: IBaseService<TEntity>;
+export class ApiRoute implements IApiRoute {
+    controller: IWeatherController;
+    service: IWeatherService;
 
-    constructor(public app: Express, public apiName: string) {
+    constructor(public app: Express) {
+
         this.app = app;
+
+        let service = new WeatherService();
+        this.controller = new WeatherController(service);
+
         self = this;
 
         this.get();
     }
 
     get() {
-        this.app.get('/api/weather', (req: Request, res: Response) => {
+        this.app.get('/api/weather/:cords', (req: Request, res: Response) => {
 
-            self.baseController.getEntities(req, res);
+            self.controller.get(req, res);
         });
     }
 }
