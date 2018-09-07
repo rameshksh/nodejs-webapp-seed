@@ -1,7 +1,7 @@
 {
-  "name": "mean-app",
+  "name": "nodejs-app",
   "version": "1.0.0",
-  "description": "Mean App using Angular 2",
+  "description": "Nodejs Web application",
   "main": "index.js",
   "scripts": {
     "start": "node ./dist/start.js",

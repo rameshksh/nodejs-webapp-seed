@@ -3,20 +3,12 @@
       "allowSyntheticDefaultImports": true,
       "declaration": false,
       "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "lib": [
-        "dom",
-        "es2015"
-      ],
-      "types": ["reflect-metadata", "express", ""],
-      "module": "es2015",
+      "experimentalDecorators": true,     
+      "types": ["reflect-metadata", "express", ""],      
       "moduleResolution": "node",
       "sourceMap": true,
       "target": "es5"
-    },
-    "include": [
-     
-    ],
+    },   
     "exclude": [
       "node_modules"
     ],
